@@ -23,5 +23,3 @@ func (repo *Repository) OpenCollection(collection string) *mgo.Collection {
 func (repo *Repository) Close() {
 	repo.session.Close()
 }
-
-type M map[string]string
