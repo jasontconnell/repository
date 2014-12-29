@@ -1,14 +1,16 @@
- package repository
+package repository
 
 import (
 	"conf"
 )
 
 type Configuration struct {
-	Url string `json:"Url"`
-	Database string `json:"Database"`
+	Url string `json:"url"`
+	Database string `json:"database"`
 }
 
-func (config *Configuration) LoadConfig(file string){
-	conf.LoadConfig(file, config)
+func LoadConfig(file string) Configuration {
+	config := Configuration{}
+	conf.LoadConfig(file, &config)
+	return config
 }
