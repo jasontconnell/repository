@@ -6,14 +6,14 @@ import (
 
 type Repository struct {
 	databaseName string
-	url string
+	databaseServer string
 	session *mgo.Session
 }
  
-func (repo *Repository) Initialize(url, dbname string) {
-	repo.url = url
+func (repo *Repository) Initialize(server, dbname string) {
+	repo.databaseServer = server
 	repo.databaseName = dbname
-	repo.session, _ = mgo.Dial(repo.url)
+	repo.session, _ = mgo.Dial(repo.databaseServer)
 }
  
 func (repo *Repository) OpenCollection(collection string) *mgo.Collection {

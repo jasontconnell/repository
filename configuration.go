@@ -5,7 +5,7 @@ import (
 )
 
 type Configuration struct {
-	Url string `json:"url"`
+	DatabaseServer string `json:"databaseServer"`
 	Database string `json:"database"`
 }
 
