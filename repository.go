@@ -10,10 +10,11 @@ type Repository struct {
 	session *mgo.Session
 }
  
-func (repo *Repository) Initialize(server, dbname string) {
+func (repo *Repository) Initialize(server, dbname, dbuser, dbpwd string) {
 	repo.databaseServer = server
 	repo.databaseName = dbname
-	repo.session, _ = mgo.Dial(repo.databaseServer)
+	url := "mongodb://" + dbuser + ":" + dbpwd + "@" + server + ":27017/" + dbname
+	repo.session, _ = mgo.Dial(url)
 }
  
 func (repo *Repository) OpenCollection(collection string) *mgo.Collection {
