@@ -13,7 +13,13 @@ type Repository struct {
 func (repo *Repository) Initialize(server, dbname, dbuser, dbpwd string) {
 	repo.databaseServer = server
 	repo.databaseName = dbname
-	url := "mongodb://" + dbuser + ":" + dbpwd + "@" + server + ":27017/" + dbname
+
+	upwd := ""
+	if dbuser != "" && dbpwd != "" {
+		upwd = dbuser + ":" + dbpwd + "@"
+	}
+
+	url := "mongodb://" + upwd + server + ":27017/" + dbname
 	repo.session, _ = mgo.Dial(url)
 }
  
