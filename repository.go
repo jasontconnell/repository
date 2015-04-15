@@ -5,29 +5,35 @@ import (
 )
 
 type Repository struct {
-	databaseName string
-	databaseServer string
 	session *mgo.Session
 }
+
+type MasterConnection struct {
+	session *mgo.Session
+}
+
+var master *MasterConnection
  
-func (repo *Repository) Initialize(server, dbname, dbuser, dbpwd string) {
-	repo.databaseServer = server
-	repo.databaseName = dbname
+func (repo *Repository) Initialize(config Configuration) {
 
 	upwd := ""
-	if dbuser != "" && dbpwd != "" {
-		upwd = dbuser + ":" + dbpwd + "@"
+	if config.DatabaseUser != "" && config.DatabasePassword != "" {
+		upwd = config.DatabaseUser + ":" + config.DatabasePassword + "@"
 	}
 
-	url := "mongodb://" + upwd + server + ":27017/" + dbname
-	session, _ := mgo.Dial(url)
-	session.SetMode(mgo.Monotonic, true)
+	url := "mongodb://" + upwd + config.DatabaseServer + ":27017/" + config.Database
 
-	repo.session = session.Copy()
+	if master == nil {
+		master = new(MasterConnection)
+		master.session, _ = mgo.Dial(url)
+		master.session.SetMode(mgo.Monotonic, true)
+	}
+
+	repo.session = master.session.Copy()
 }
  
 func (repo *Repository) OpenCollection(collection string) *mgo.Collection {
-	return repo.session.DB(repo.databaseName).C(collection)
+	return repo.session.DB("").C(collection)
 }
  
 func (repo *Repository) Close() {
