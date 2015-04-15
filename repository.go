@@ -20,7 +20,10 @@ func (repo *Repository) Initialize(server, dbname, dbuser, dbpwd string) {
 	}
 
 	url := "mongodb://" + upwd + server + ":27017/" + dbname
-	repo.session, _ = mgo.Dial(url)
+	session, _ := mgo.Dial(url)
+	session.SetMode(mgo.Monotonic, true)
+
+	repo.session = session.Copy()
 }
  
 func (repo *Repository) OpenCollection(collection string) *mgo.Collection {
