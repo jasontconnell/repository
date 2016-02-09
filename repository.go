@@ -15,7 +15,6 @@ type MasterConnection struct {
 var master *MasterConnection
  
 func (repo *Repository) Initialize(config Configuration) {
-
 	upwd := ""
 	if config.DatabaseUser != "" && config.DatabasePassword != "" {
 		upwd = config.DatabaseUser + ":" + config.DatabasePassword + "@"
