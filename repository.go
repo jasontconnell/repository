@@ -24,6 +24,9 @@ func (repo *Repository) Initialize(config Configuration) {
 
 	if master == nil {
 		master = new(MasterConnection)
+	}
+
+	if master.session == nil {
 		master.session, _ = mgo.Dial(url)
 		master.session.SetMode(mgo.Monotonic, true)
 	}
