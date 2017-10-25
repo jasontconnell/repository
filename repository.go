@@ -1,6 +1,6 @@
 package repository
- 
-import ( 
+
+import (
 	"gopkg.in/mgo.v2"
 )
 
@@ -13,7 +13,7 @@ type MasterConnection struct {
 }
 
 var master *MasterConnection
- 
+
 func (repo *Repository) Initialize(config Configuration) {
 	upwd := ""
 	if config.DatabaseUser != "" && config.DatabasePassword != "" {
@@ -33,11 +33,11 @@ func (repo *Repository) Initialize(config Configuration) {
 
 	repo.session = master.session.Copy()
 }
- 
+
 func (repo *Repository) OpenCollection(collection string) *mgo.Collection {
 	return repo.session.DB("").C(collection)
 }
- 
+
 func (repo *Repository) Close() {
 	repo.session.Close()
 }

@@ -1,13 +1,13 @@
 package repository
 
 import (
-	"conf"
+	"github.com/jasontconnell/conf"
 )
 
 type Configuration struct {
-	DatabaseServer string `json:"databaseServer"`
-	Database string `json:"database"`
-	DatabaseUser string `json:"databaseUser"`
+	DatabaseServer   string `json:"databaseServer"`
+	Database         string `json:"database"`
+	DatabaseUser     string `json:"databaseUser"`
 	DatabasePassword string `json:"databasePassword"`
 }
 
