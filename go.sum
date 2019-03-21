@@ -1,4 +1,8 @@
 github.com/jasontconnell/conf v0.0.0-20180214221311-246c2addc6bb h1:FWcEf/zuYhEQOOZVJZNdJOsN4Cn3Fe5J/Ld/r/xRbuA=
 github.com/jasontconnell/conf v0.0.0-20180214221311-246c2addc6bb/go.mod h1:nWfVYYLqM+8T/yaz+OAYPVUuETD0AtrL9tVnuAw9uK4=
+github.com/jasontconnell/conf v1.0.0 h1:JlH49EuO4XMoIEIAs8Jt+7knwkgf/AUOcIj2EGIWkEU=
+github.com/jasontconnell/conf v1.0.0/go.mod h1:nWfVYYLqM+8T/yaz+OAYPVUuETD0AtrL9tVnuAw9uK4=
+github.com/jasontconnell/conf v1.0.1 h1:/bFrRuruwC1JsB7oQ5GR5A1BE+DXmhTahlu7/fIa9uY=
+github.com/jasontconnell/conf v1.0.1/go.mod h1:nWfVYYLqM+8T/yaz+OAYPVUuETD0AtrL9tVnuAw9uK4=
 gopkg.in/mgo.v2 v2.0.0-20160818020120-3f83fa500528 h1:/saqWwm73dLmuzbNhe92F0QsZ/KiFND+esHco2v1hiY=
 gopkg.in/mgo.v2 v2.0.0-20160818020120-3f83fa500528/go.mod h1:yeKp02qBN3iKW1OzL3MGk2IdtZzaj7SFntXj72NppTA=
