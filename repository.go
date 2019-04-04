@@ -3,8 +3,8 @@ package repository
 import (
 	"strconv"
 
+	mgo "github.com/globalsign/mgo"
 	"github.com/pkg/errors"
-	mgo "gopkg.in/mgo.v2"
 )
 
 type Repository struct {
