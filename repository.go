@@ -3,6 +3,7 @@ package repository
 import (
 	"strconv"
 
+	"github.com/pkg/errors"
 	mgo "gopkg.in/mgo.v2"
 )
 
@@ -36,7 +37,7 @@ func (repo *Repository) Initialize(config Configuration) error {
 		var err error
 		master.session, err = mgo.Dial(url)
 		if err != nil {
-			return err
+			return errors.Wrapf(err, "Couldn't connect on url %s", url)
 		}
 		master.session.SetMode(mgo.Monotonic, true)
 	}
