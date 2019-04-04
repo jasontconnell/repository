@@ -16,7 +16,7 @@ type MasterConnection struct {
 
 var master *MasterConnection
 
-func (repo *Repository) Initialize(config Configuration) {
+func (repo *Repository) Initialize(config Configuration) error {
 	upwd := ""
 	if config.DatabaseUser != "" && config.DatabasePassword != "" {
 		upwd = config.DatabaseUser + ":" + config.DatabasePassword + "@"
@@ -33,11 +33,16 @@ func (repo *Repository) Initialize(config Configuration) {
 	}
 
 	if master.session == nil {
-		master.session, _ = mgo.Dial(url)
+		var err error
+		master.session, err = mgo.Dial(url)
+		if err != nil {
+			return err
+		}
 		master.session.SetMode(mgo.Monotonic, true)
 	}
 
 	repo.session = master.session.Copy()
+	return nil
 }
 
 func (repo *Repository) OpenCollection(collection string) *mgo.Collection {
