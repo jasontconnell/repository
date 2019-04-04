@@ -8,5 +8,3 @@ github.com/jasontconnell/conf v1.0.1 h1:/bFrRuruwC1JsB7oQ5GR5A1BE+DXmhTahlu7/fIa
 github.com/jasontconnell/conf v1.0.1/go.mod h1:nWfVYYLqM+8T/yaz+OAYPVUuETD0AtrL9tVnuAw9uK4=
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
-gopkg.in/mgo.v2 v2.0.0-20160818020120-3f83fa500528 h1:/saqWwm73dLmuzbNhe92F0QsZ/KiFND+esHco2v1hiY=
-gopkg.in/mgo.v2 v2.0.0-20160818020120-3f83fa500528/go.mod h1:yeKp02qBN3iKW1OzL3MGk2IdtZzaj7SFntXj72NppTA=
