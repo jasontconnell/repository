@@ -1,7 +1,9 @@
 package repository
 
 import (
-	"gopkg.in/mgo.v2"
+	"strconv"
+
+	mgo "gopkg.in/mgo.v2"
 )
 
 type Repository struct {
@@ -20,7 +22,11 @@ func (repo *Repository) Initialize(config Configuration) {
 		upwd = config.DatabaseUser + ":" + config.DatabasePassword + "@"
 	}
 
-	url := "mongodb://" + upwd + config.DatabaseServer + ":27017/" + config.Database
+	if config.DatabasePort == 0 {
+		config.DatabasePort = 27017
+	}
+
+	url := "mongodb://" + upwd + config.DatabaseServer + ":" + strconv.Itoa(config.DatabasePort) + "/" + config.Database
 
 	if master == nil {
 		master = new(MasterConnection)
