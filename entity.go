@@ -18,14 +18,14 @@ func (repo *Repository) GetEntityList(list []interface{}) []Entity {
 }
 
 // GetList returns a filtered list
-func (repo *Repository) GetList(collection string, list []interface{}, filter bson.M) error {
+func (repo *Repository) GetList(collection string, list interface{}, filter bson.M) error {
 	q := repo.OpenCollection(collection).Find(filter)
 	err := q.All(list)
 	return err
 }
 
 // GetAll returns a non-filtered list
-func (repo *Repository) GetAll(collection string, list []interface{}) error {
+func (repo *Repository) GetAll(collection string, list interface{}) error {
 	return repo.GetList(collection, list, bson.M{})
 }
 
