@@ -2,9 +2,19 @@ package repository
 
 import "github.com/globalsign/mgo/bson"
 
+// Entity is a database object
 type Entity interface {
 	GetId() bson.ObjectId
 	SetId(id bson.ObjectId)
+}
+
+// GetEntityList - quickly convert a slice of interface to a slice of Entity
+func (repo *Repository) GetEntityList(list []interface{}) []Entity {
+	entities := []Entity{}
+	for _, v := range list {
+		entities = append(entities, v.(Entity))
+	}
+	return entities
 }
 
 // GetList returns a filtered list
@@ -20,12 +30,12 @@ func (repo *Repository) GetAll(collection string, list []Entity) error {
 }
 
 // Save saves a doc with id, or inserts with a new id
-func (repo *Repository) Save(collection string, id bson.ObjectId, obj Entity) error {
-	if id == "" {
-		id = bson.NewObjectId()
+func (repo *Repository) Save(collection string, obj Entity) error {
+	if obj.GetId() == "" {
+		obj.SetId(bson.NewObjectId())
 	}
 
-	_, err := repo.OpenCollection(collection).UpsertId(id, obj)
+	_, err := repo.OpenCollection(collection).UpsertId(obj.GetId(), obj)
 	return err
 }
 
