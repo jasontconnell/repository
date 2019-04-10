@@ -8,14 +8,14 @@ type Entity interface {
 }
 
 // GetList returns a filtered list
-func (repo *Repository) GetList(collection string, list []Entity, filter bson.M) ([]Entity, error) {
+func (repo *Repository) GetList(collection string, list []Entity, filter bson.M) error {
 	q := repo.OpenCollection(collection).Find(filter)
 	err := q.All(list)
-	return list, err
+	return err
 }
 
 // GetAll returns a non-filtered list
-func (repo *Repository) GetAll(collection string, list []Entity) ([]Entity, error) {
+func (repo *Repository) GetAll(collection string, list []Entity) error {
 	return repo.GetList(collection, list, bson.M{})
 }
 
