@@ -5,11 +5,7 @@ import (
 )
 
 type Configuration struct {
-	DatabaseServer   string `json:"databaseServer"`
-	Database         string `json:"database"`
-	DatabaseUser     string `json:"databaseUser"`
-	DatabasePassword string `json:"databasePassword"`
-	DatabasePort     int    `json:"databasePort"`
+	ConnectionString string `json:"connectionString"`
 }
 
 func LoadConfig(file string) Configuration {

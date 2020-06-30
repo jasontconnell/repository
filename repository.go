@@ -1,8 +1,6 @@
 package repository
 
 import (
-	"strconv"
-
 	mgo "github.com/globalsign/mgo"
 	"github.com/pkg/errors"
 )
@@ -18,26 +16,15 @@ type MasterConnection struct {
 var master *MasterConnection
 
 func (repo *Repository) Initialize(config Configuration) error {
-	upwd := ""
-	if config.DatabaseUser != "" && config.DatabasePassword != "" {
-		upwd = config.DatabaseUser + ":" + config.DatabasePassword + "@"
-	}
-
-	if config.DatabasePort == 0 {
-		config.DatabasePort = 27017
-	}
-
-	url := "mongodb://" + upwd + config.DatabaseServer + ":" + strconv.Itoa(config.DatabasePort) + "/" + config.Database
-
 	if master == nil {
 		master = new(MasterConnection)
 	}
 
 	if master.session == nil {
 		var err error
-		master.session, err = mgo.Dial(url)
+		master.session, err = mgo.Dial(config.ConnectionString)
 		if err != nil {
-			return errors.Wrapf(err, "Couldn't connect on url %s", url)
+			return errors.Wrapf(err, "Couldn't connect on url %s", config.ConnectionString)
 		}
 		master.session.SetMode(mgo.Monotonic, true)
 	}
