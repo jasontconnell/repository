@@ -1,8 +1,9 @@
 package repository
 
 import (
+	"fmt"
+
 	mgo "github.com/globalsign/mgo"
-	"github.com/pkg/errors"
 )
 
 type Repository struct {
@@ -24,7 +25,7 @@ func (repo *Repository) Initialize(config Configuration) error {
 		var err error
 		master.session, err = mgo.Dial(config.ConnectionString)
 		if err != nil {
-			return errors.Wrapf(err, "Couldn't connect on url %s", config.ConnectionString)
+			return fmt.Errorf("couldn't connect on url %s %w", config.ConnectionString, err)
 		}
 		master.session.SetMode(mgo.Monotonic, true)
 	}
