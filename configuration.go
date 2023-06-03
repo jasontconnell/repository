@@ -6,6 +6,7 @@ import (
 
 type Configuration struct {
 	ConnectionString string `json:"connectionString"`
+	Database         string `json:"database"`
 }
 
 func LoadConfig(file string) Configuration {

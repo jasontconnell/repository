@@ -1,43 +1,22 @@
 package repository
 
 import (
-	"fmt"
+	"context"
 
-	mgo "github.com/globalsign/mgo"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-type Repository struct {
-	session *mgo.Session
+type Repository[T Entity] struct {
+	connstr  string
+	database string
 }
 
-type MasterConnection struct {
-	session *mgo.Session
+func (repo *Repository[T]) Initialize(config Configuration) {
+	repo.connstr = config.ConnectionString
+	repo.database = config.Database
 }
 
-var master *MasterConnection
-
-func (repo *Repository) Initialize(config Configuration) error {
-	if master == nil {
-		master = new(MasterConnection)
-	}
-
-	if master.session == nil {
-		var err error
-		master.session, err = mgo.Dial(config.ConnectionString)
-		if err != nil {
-			return fmt.Errorf("couldn't connect on url %s %w", config.ConnectionString, err)
-		}
-		master.session.SetMode(mgo.Monotonic, true)
-	}
-
-	repo.session = master.session.Copy()
-	return nil
-}
-
-func (repo *Repository) OpenCollection(collection string) *mgo.Collection {
-	return repo.session.DB("").C(collection)
-}
-
-func (repo *Repository) Close() {
-	repo.session.Close()
+func (repo *Repository[T]) connect() (*mongo.Client, error) {
+	return mongo.Connect(context.TODO(), options.Client().ApplyURI(repo.connstr))
 }
